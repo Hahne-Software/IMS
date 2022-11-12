@@ -5,7 +5,8 @@
     "license": "AGPL",
     "autoload": {
         "psr-4": {
-            "HahneSoftware\\IMS\\Server\\": "src/"
+            "HahneSoftware\\IMS\\Server\\": "src/",
+            "HahneSoftware\\IMS\\Library\\": "lib/"
         }
     },
     "authors": [
