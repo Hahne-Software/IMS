@@ -2,7 +2,7 @@
 
 namespace HahneSoftware\IMS\Server\Domain\Object;
 
-use HahneSoftware\IMS\Server\Domain\Object\InformationObject;
+use HahneSoftware\IMS\Server\Domain\Systems\InformationSystem;
 
 class ObjectHeader
 {
@@ -15,5 +15,5 @@ class ObjectHeader
 
     private string $type;
 
-    private string $source;
+    private InformationSystem $source;
 }
