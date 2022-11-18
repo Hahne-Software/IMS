@@ -5,8 +5,7 @@
     "license": "AGPL",
     "autoload": {
         "psr-4": {
-            "HahneSoftware\\IMS\\Server\\": "src/",
-            "HahneSoftware\\IMS\\Library\\": "lib/"
+            "HahneSoftware\\IMS\\Server\\": "src/"
         }
     },
     "authors": [
@@ -15,5 +14,7 @@
             "email": "marian@hahne.software"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-pdo": "*"
+    }
 }
