@@ -29,4 +29,21 @@ class ConfigTest extends TestCase
         $this->assertNotEquals('notvalue', $config->get('test.nested'));
         $this->assertNotEquals('notvalue', $config->get('test.nested.deeply'));
     }
+
+    public function testSetConfig(): void
+    {
+        $config = new Config([]);
+        $config->set('test', 'value');
+        $this->assertEquals('value', $config->get('test'));
+        $this->assertNotEquals('notvalue', $config->get('test'));
+    }
+
+    public function testSetNestedConfig(): void
+    {
+        $config = new Config([]);
+        $config->set('test.nested', 'value');
+        $this->assertEquals('value', $config->get('test.nested'));
+        $this->assertNotEquals('notvalue', $config->get('test'));
+        $this->assertNotEquals('notvalue', $config->get('test.nested'));
+    }
 }

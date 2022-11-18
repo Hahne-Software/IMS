@@ -23,4 +23,17 @@ class Config
         }
         return $value;
     }
+
+    public function set(string $key, $value): void
+    {
+        $keys = explode('.', $key);
+        $config = &$this->config;
+        foreach ($keys as $key) {
+            if (!isset($config[$key])) {
+                $config[$key] = [];
+            }
+            $config = &$config[$key];
+        }
+        $config = $value;
+    }
 }
