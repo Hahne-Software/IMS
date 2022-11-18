@@ -1,0 +1,33 @@
+name: ims-server
+services:
+    ims-server:
+        image: php:8.2-rc
+        container_name: ims-server
+        ports:
+        - 8080:8080
+        volumes:
+            - /ims/server:/app
+        environment:
+        - SPRING_PROFILES_ACTIVE=dev
+        command: php -S 0.0.0.0:8080 -t /app/public/
+        depends_on:
+        - ims-db
+        - ims-couch
+    ims-db:
+        image: postgres:15.1
+        container_name: ims-db
+        ports:
+        - 5432:5432
+        environment:
+        - POSTGRES_USER=ims
+        - POSTGRES_PASSWORD=ims
+        - POSTGRES_DB=ims
+    ims-couch:
+        image: couchdb:3.2.2
+        container_name: ims-couch
+        ports:
+        - 5984:5984
+        environment:
+        - COUCHDB_USER=ims
+        - COUCHDB_PASSWORD=ims
+        - COUCHDB_SECRET=ims
