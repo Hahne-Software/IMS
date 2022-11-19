@@ -16,6 +16,7 @@ class EnvConfigLoader implements ConfigLoaderInterface
 
             $key = str_replace(self::CONFIG_PREFIX, '', $key);
             $key = str_replace('_', '.', $key);
+
             $config->set($key, $value);
         }
 

@@ -32,6 +32,12 @@ class Config
             if (!isset($config[$key])) {
                 $config[$key] = [];
             }
+
+            // throw exception if nested key is not an array
+            if(!is_array($config[$key])) {
+                throw new \InvalidArgumentException('The index "' . $key . '" is already used.');
+            }
+
             $config = &$config[$key];
         }
         $config = $value;
