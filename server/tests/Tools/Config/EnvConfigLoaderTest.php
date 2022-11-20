@@ -56,4 +56,14 @@ class EnvConfigLoaderTest extends TestCase
         unset($_ENV['IMS_TEST']);
         unset($_ENV['IMS_TEST_NESTED']);
     }
+
+    public function testLoadNamedConfig(): void
+    {
+        $config = (new EnvConfigLoader())->loadNamedConfig('TEST2_');
+        $this->assertEquals('value_nested', $config->get('NESTED'));
+        $this->assertNotEquals('notvalue', $config->get('NESTED'));
+        $this->assertEquals('value_nested', $config->get('NESTED2'));
+        $this->assertNotEquals('notvalue', $config->get('NESTED2'));
+
+    }
 }

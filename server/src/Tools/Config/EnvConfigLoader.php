@@ -8,24 +8,26 @@ class EnvConfigLoader implements ConfigLoaderInterface
 
     public function loadConfig(): Config
     {
-        $envs = $this->loadEnvs($this::CONFIG_PREFIX);
+        return $this->loadNamedConfig('');
+    }
+
+    public function loadNamedConfig(string $name): Config
+    {
+        $envs = $this->loadEnvs($this::CONFIG_PREFIX . $name);
 
         $config = new Config();
 
         foreach ($envs as $key => $value) {
-
+            // remove prefix
             $key = str_replace(self::CONFIG_PREFIX, '', $key);
+            // remove name when named config should be loaded
+            $key = str_replace($name, '', $key);
             $key = str_replace('_', '.', $key);
 
             $config->set($key, $value);
         }
 
         return $config;
-    }
-
-    public function loadNamedConfig(string $name): Config
-    {
-        // TODO: Implement loadNamedConfig() method.
     }
 
     private function loadEnvs(string $prefix): array
