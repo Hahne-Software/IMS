@@ -1,0 +1,10 @@
+test = "value"
+
+[test2]
+nested = "value_nested"
+nested2 = "value_nested"
+
+[test3]
+    [test3.nested]
+    nested = "value_deeply_nested"
+    nested2 = "value_deeply_nested"

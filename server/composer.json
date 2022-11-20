@@ -15,7 +15,8 @@
         }
     ],
     "require": {
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+        "yosymfony/toml": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"
