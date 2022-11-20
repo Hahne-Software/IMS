@@ -25,14 +25,14 @@ class EnvConfigLoaderTest extends TestCase
         unset($_ENV['IMS_TEST3_NESTED_NESTED']);
     }
 
-    public function testLoadConfig(): void
+    public function testLoadConfigFromEnv(): void
     {
         $config = (new EnvConfigLoader())->loadConfig();
         $this->assertEquals('value', $config->get('TEST'));
         $this->assertNotEquals('notvalue', $config->get('TEST'));
     }
 
-    public function testLoadNestedConfig(): void
+    public function testLoadNestedConfigFromEnv(): void
     {
         $config = (new EnvConfigLoader())->loadConfig();
         $this->assertEquals('value_nested', $config->get('TEST2.NESTED'));
@@ -44,7 +44,7 @@ class EnvConfigLoaderTest extends TestCase
         $this->assertNotEquals('notvalue', $config->get('TEST3.NESTED.NESTED'));
     }
 
-    public function testDoubleUsedIndexFails(): void
+    public function testFailsIfKeyIsDoubleUsedInEnv(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The index "TEST" is already used.');
@@ -57,7 +57,7 @@ class EnvConfigLoaderTest extends TestCase
         unset($_ENV['IMS_TEST_NESTED']);
     }
 
-    public function testLoadNamedConfig(): void
+    public function testLoadNamedConfigFromEnv(): void
     {
         $config = (new EnvConfigLoader())->loadNamedConfig('TEST2_');
         $this->assertEquals('value_nested', $config->get('NESTED'));

@@ -7,14 +7,14 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
 {
-    public function testGetConfig(): void
+    public function testReturnsValueForKey(): void
     {
         $config = new Config(['test' => 'value']);
         $this->assertEquals('value', $config->get('test'));
         $this->assertNotEquals('notvalue', $config->get('test'));
     }
 
-    public function testGetNestedConfig(): void
+    public function testReturnsValueForNestedKey(): void
     {
         $config = new Config(['test' => ['nested' => 'value']]);
         $this->assertEquals('value', $config->get('test.nested'));
@@ -22,7 +22,7 @@ class ConfigTest extends TestCase
         $this->assertNotEquals('notvalue', $config->get('test.nested'));
     }
 
-    public function testDeeplyNestedConfig(): void {
+    public function testReturnValueForDeeplyNestedKey(): void {
         $config = new Config(['test' => ['nested' => ['deeply' => 'value']]]);
         $this->assertEquals('value', $config->get('test.nested.deeply'));
         $this->assertNotEquals('notvalue', $config->get('test'));
@@ -30,7 +30,7 @@ class ConfigTest extends TestCase
         $this->assertNotEquals('notvalue', $config->get('test.nested.deeply'));
     }
 
-    public function testSetConfig(): void
+    public function testSetValueForKey(): void
     {
         $config = new Config([]);
         $config->set('test', 'value');
@@ -38,7 +38,7 @@ class ConfigTest extends TestCase
         $this->assertNotEquals('notvalue', $config->get('test'));
     }
 
-    public function testSetNestedConfig(): void
+    public function testSetValueForNestedKey(): void
     {
         $config = new Config([]);
         $config->set('test.nested', 'value');
