@@ -1,9 +1,6 @@
 package de.hahnesoftware.ims.server.domain.user;
 
-import org.eclipse.microprofile.graphql.Description;
-import org.eclipse.microprofile.graphql.GraphQLApi;
-import org.eclipse.microprofile.graphql.Name;
-import org.eclipse.microprofile.graphql.Query;
+import org.eclipse.microprofile.graphql.*;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -30,5 +27,10 @@ public class UserResource {
     @Description("Get a user by id")
     public User getUserById(@Name("userId") int id) {
         return userService.getUserById(id);
+    }
+
+    @Mutation("createUser")
+    public User createUser(User user) {
+        return userService.createUser(user);
     }
 }
