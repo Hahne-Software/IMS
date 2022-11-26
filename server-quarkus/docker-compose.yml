@@ -1,0 +1,20 @@
+name: ims-server
+services:
+  ims-db:
+    image: postgres:15.1
+    container_name: ims-db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=ims
+      - POSTGRES_PASSWORD=ims
+      - POSTGRES_DB=ims
+  ims-mongodb:
+    image: mongo:6.0.1
+    container_name: ims-mongodb
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=ims
+      - MONGO_INITDB_ROOT_PASSWORD=ims
+      - MONGO_INITDB_DATABASE=ims

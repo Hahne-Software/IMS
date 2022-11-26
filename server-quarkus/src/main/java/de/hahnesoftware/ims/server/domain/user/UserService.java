@@ -1,46 +1,36 @@
 package de.hahnesoftware.ims.server.domain.user;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
 public class UserService {
-
-    private List<User> users = new ArrayList<>();
+    @Inject
+    UserRepository userRepository;
 
     public UserService() {
-        User user1 = new User();
-        user1.firstName = "John";
-        user1.lastName = "Doe";
-        user1.email = "doe@example.com";
-        user1.status = UserStatus.ACTIVE;
 
-        users.add(user1);
-
-        User user2 = new User();
-        user2.firstName = "Jane";
-        user2.lastName = "Doe";
-        user2.email = "jane@example.com";
-        user2.status = UserStatus.INACTIVE;
-
-        users.add(user2);
     }
 
     public List<User> getAllUsers() {
-        return users;
+        return this.userRepository.listAll();
     }
 
-    public User getUserById(int id) {
-        return users.get(id);
+    public User getUserById(Long id) {
+        return this.userRepository.findById(id);
     }
 
     public User getUserByEmail(String email) {
-        return users.stream().filter(user -> user.email.equals(email)).findFirst().orElse(null);
+        return this.userRepository.findByEmail(email);
     }
 
+    @Transactional
     public User createUser(User user) {
-        users.add(user);
+        user.status = UserStatus.ACTIVE;
+        this.userRepository.persist(user);
         return user;
     }
 }

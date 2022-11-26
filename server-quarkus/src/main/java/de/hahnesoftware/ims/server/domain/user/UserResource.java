@@ -25,7 +25,7 @@ public class UserResource {
 
     @Query("getUser")
     @Description("Get a user by id")
-    public User getUserById(@Name("userId") int id) {
+    public User getUserById(@Name("userId") Long id) {
         return userService.getUserById(id);
     }
 
